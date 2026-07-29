@@ -28,7 +28,6 @@ interviewer_prompt = ChatPromptTemplate.from_messages(
 summary_chain = summary_prompt | model | parser
 code_chain = code_prompt | model | parser
 interview_chain = interviewer_prompt | model | parser
-
 parallel_chain= RunnableParallel(
     summary = summary_chain,
     code = code_chain,
