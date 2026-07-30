@@ -32,7 +32,7 @@ fastapi_chain = fastapi_prompt | model | parser
 langchain_prompt  = ChatPromptTemplate.from_messages(
     [
         ("system","You are professional Langchain Agent developer"),
-        ("humnan","{question}")
+        ("human","{question}")
     ]
 )
 langchain_chain = langchain_prompt | model | parser
