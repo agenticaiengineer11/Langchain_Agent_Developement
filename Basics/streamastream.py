@@ -1,5 +1,6 @@
 print("===================Stream and astream use==========")
 from dotenv import load_dotenv
+import asyncio
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -22,13 +23,19 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 chain = prompt | model | parser
-question = input("Enter your question: ")
+async def main():
 
-print("\nAI: ", end="", flush=True)
-for chunk in chain.stream(
-    {
-        "question":question
-    }
-):
-    print(chunk,end="",flush=True)
-print()
+    question = input("Enter your question: ")
+
+    print("\nAI: ", end="", flush=True)
+
+    async for chunk in chain.astream(
+        {
+            "question": question
+        }
+    ):
+        print(chunk, end="", flush=True)
+
+    print()
+
+asyncio.run(main())
