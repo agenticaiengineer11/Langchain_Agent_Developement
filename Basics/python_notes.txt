@@ -1,0 +1,72 @@
+==============================
+PYTHON NOTES
+==============================
+
+Python is a high-level, interpreted, and object-oriented programming language.
+
+It was created by Guido van Rossum and released in 1991.
+
+Python is easy to learn because of its simple and readable syntax.
+
+----------------------------------------
+Features of Python
+----------------------------------------
+
+1. Easy to Learn
+2. Object-Oriented
+3. Cross-Platform
+4. Open Source
+5. Large Standard Library
+6. Dynamically Typed
+7. Interpreted Language
+
+----------------------------------------
+Applications of Python
+----------------------------------------
+
+- Artificial Intelligence
+- Machine Learning
+- Data Science
+- Web Development
+- Automation
+- Desktop Applications
+- Game Development
+- Cyber Security
+
+----------------------------------------
+Python Data Types
+----------------------------------------
+
+1. int
+2. float
+3. str
+4. bool
+5. list
+6. tuple
+7. set
+8. dict
+
+----------------------------------------
+Example Code
+----------------------------------------
+
+def greet(name):
+    return f"Hello, {name}"
+
+print(greet("Noman"))
+
+----------------------------------------
+Advantages
+----------------------------------------
+
+- Simple syntax
+- Huge community support
+- Thousands of libraries
+- Excellent for AI and Automation
+- Fast development
+
+----------------------------------------
+Summary
+----------------------------------------
+
+Python is one of the most popular programming languages in the world. It is widely used in Artificial Intelligence, Machine Learning, Web Development, Data Science, Automation, and Backend Development. Because of its readability and powerful ecosystem, Python is an excellent language for beginners as well as professional software engineers.
