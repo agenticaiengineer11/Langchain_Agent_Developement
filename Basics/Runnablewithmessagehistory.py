@@ -38,7 +38,8 @@ chatbot = RunnableWithMessageHistory(
 session_id = input("Enter session ID: ")
 while True:
     question = input("\nYou: ")
-    if question.lower() == "exit":
+    if question.lower() in ["exit","quit","bye"]:
+        print("Good Bye!")
         break
     response = chatbot.invoke(
         {
