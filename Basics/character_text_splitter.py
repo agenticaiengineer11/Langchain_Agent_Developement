@@ -1,4 +1,4 @@
-from langchain_text_splitters import CharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 text = """
 python is very easy. Python is used very highly in AI and machine learning.
@@ -8,21 +8,15 @@ Python is best for learning because it's very easy.
 Python becomes more popular all over the world.
 """
 
-text_splitter = CharacterTextSplitter(
-    separator="\n\n",
+text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=50,
-    chunk_overlap=0
+    chunk_overlap=20
 )
 
 chunks = text_splitter.split_text(text)
 
-print(f"Length of chunks: {len(chunks)}")
+print("Total chunks:", len(chunks))
 
 for i, chunk in enumerate(chunks, start=1):
-    print("=" * 50)
-    print(f"Chunk {i}")
-    print("=" * 50)
+    print(f"\n--- Chunk {i} ---")
     print(chunk)
-
-print("\nType of chunks:", type(chunks))
-print("Type of first chunk:", type(chunks[0]))
