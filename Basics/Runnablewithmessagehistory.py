@@ -24,11 +24,18 @@ chain = prompt | model | parser
 
 store ={}
 
-def get_session_history(session_id:str):
+def get_session_history(session_id: str):
+
     if session_id not in store:
         store[session_id] = InMemoryChatMessageHistory()
 
-    return store[session_id]
+    history = store[session_id]
+
+    # Keep only the latest 6 messages
+    if len(history.messages) > 6:
+        history.messages = history.messages[-6:]
+
+    return history
 chatbot = RunnableWithMessageHistory(
     chain,
     get_session_history,
