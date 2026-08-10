@@ -60,21 +60,12 @@ Return only the updated summary.
 
     return response.content
 
-
-# ============================================================
-# 6. Chat Function
-# ============================================================
-
 def chat(session_id: str, question: str):
 
     session = get_session(session_id)
 
     history = session["history"]
     summary = session["summary"]
-
-    # --------------------------------------------------------
-    # Create context for the main LLM
-    # --------------------------------------------------------
 
     context = ""
 
@@ -86,10 +77,6 @@ def chat(session_id: str, question: str):
 
         for message in history:
             context += f"{message.type}: {message.content}\n"
-
-    # --------------------------------------------------------
-    # Create prompt
-    # --------------------------------------------------------
 
     prompt = f"""
 You are a professional AI assistant.
@@ -104,18 +91,9 @@ Current User Question:
 
 Answer clearly and naturally.
 """
-
-    # --------------------------------------------------------
-    # Ask main LLM
-    # --------------------------------------------------------
-
     response = model.invoke(prompt)
 
     answer = response.content
-
-    # --------------------------------------------------------
-    # Store new messages
-    # --------------------------------------------------------
 
     history.append(
         HumanMessage(content=question)
@@ -125,9 +103,6 @@ Answer clearly and naturally.
         AIMessage(content=answer)
     )
 
-    # --------------------------------------------------------
-    # Summarize when history becomes large
-    # --------------------------------------------------------
 
     if len(history) >= 6:
 
@@ -142,11 +117,6 @@ Answer clearly and naturally.
         session["history"] = history[-2:]
 
     return answer
-
-
-# ============================================================
-# 7. Start Chat
-# ============================================================
 
 session_id = input("Enter session ID: ")
 
