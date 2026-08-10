@@ -30,8 +30,6 @@ def get_session_history(session_id: str):
         store[session_id] = InMemoryChatMessageHistory()
 
     history = store[session_id]
-
-    # Keep only the latest 6 messages
     if len(history.messages) > 6:
         history.messages = history.messages[-6:]
 
