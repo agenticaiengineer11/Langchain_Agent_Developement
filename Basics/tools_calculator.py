@@ -61,6 +61,8 @@ for tool in calculator_tools:
     print(f"Description: {tool.description}")
     print(f"Schema: {tool.args_schema}")
     print("-" * 60)
+
+    
 print("\n" + "=" * 60)
 print("TESTING TOOLS")
 print("=" * 60)
