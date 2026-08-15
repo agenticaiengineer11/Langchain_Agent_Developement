@@ -1,5 +1,6 @@
 import os
 import requests
+from tavily import TavilyClient
 
 from pathlib import Path
 from dotenv import load_dotenv
@@ -14,9 +15,27 @@ model = ChatGroq(model="llama-3.3-70b-versatile")
 env_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(env_path)
 
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
+tavily_client = TavilyClient(
+    api_key=TAVILY_API_KEY
+)
 
 API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
+@tool
+def web_search(query:str)->str:
+    """Get search the web for current information"""
+    response= tavily_client.search(
+        query=query,
+        max_results=3
+    )
+    results = response["results"]
+
+    return "\n\n".join(
+        f"Title: {result['title']}\n"
+        f"Content: {result['content']}"
+        for result in results
+    )
 @tool
 def add(a:float,b:float)->float:
     """Add two numbers."""
@@ -70,7 +89,7 @@ def get_weather(city: str) -> str:
 
 agent = create_agent(
     model=model,
-    tools=[add,multiply,get_weather]
+    tools=[add,multiply,get_weather,web_search]
 )
 
 query = input("Enter your question: ")
