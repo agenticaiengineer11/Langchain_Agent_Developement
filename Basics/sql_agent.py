@@ -1,6 +1,15 @@
 print("====================SQL AGENT===================================")
 import sqlite3
+from langchain_community.utilities import SQLDatabase
 
+db = SQLDatabase.from_uri(
+    "sqlite:///students.db"
+)
+print(db.get_usable_table_names())
+
+print(
+    db.run("SELECT * FROM students")
+)
 connection= sqlite3.connect("students.db")
 
 cursor = connection.cursor()
