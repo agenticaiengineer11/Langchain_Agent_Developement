@@ -1,15 +1,25 @@
 print("====================SQL AGENT===================================")
 import sqlite3
 from langchain_community.utilities import SQLDatabase
+from langchain_community.agent_toolkits import create_sql_agent
+from langchain_groq import ChatGroq
+from dotenv import load_dotenv
+
+load_dotenv()
+
+model = ChatGroq(model="llama-3.3-70b-versatile")
+
+
 
 db = SQLDatabase.from_uri(
     "sqlite:///students.db"
 )
-print(db.get_usable_table_names())
-
-print(
-    db.run("SELECT * FROM students")
+agent = create_sql_agent(
+    llm=model,
+    db=db,
+    verbose=True
 )
+
 connection= sqlite3.connect("students.db")
 
 cursor = connection.cursor()
@@ -39,6 +49,16 @@ cursor.executemany(
     """,
     students
 )
+
+query = input("Ask a question about students: ")
+
+result = agent.invoke(query)
+
+print("\n" + "=" * 60)
+print("FINAL ANSWER")
+print("=" * 60)
+
+print(result["output"])
 
 connection.commit()
 
