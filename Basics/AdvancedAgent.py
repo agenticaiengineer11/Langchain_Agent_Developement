@@ -93,7 +93,8 @@ print("=" * 60)
 print(result)
 
 print("\n" + "=" * 60)
-print("FINAL ANSWER")
+print("AGENT MESSAGES")
 print("=" * 60)
 
-print(result["messages"][-1].content)
+for message in result["messages"]:
+    print("\n", message)
